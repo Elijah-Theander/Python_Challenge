@@ -13,9 +13,9 @@ import string
 
 def challenge(num):
     startingURL = 'http://www.pythonchallenge.com/pc/def/map.html'
-    print(f"--------------------------------------------------------------------------------\n"
-    "Challenge # {num}: Translate a String by using a map.\n"
-    "Starting url: {startingURL}\n"
+    print("--------------------------------------------------------------------------------\n"
+    f"Challenge # {num}: Translate a String by using a map.\n"
+    f"Starting url: {startingURL}\n"
     "The image on this page shows a map of letters.\n"
     "K->M, O-Q, E->G\n"
     "So it would appear that the map for each letter is the letter two spaces to the\n"
@@ -58,7 +58,7 @@ def challenge(num):
 
 
 def main():
-    print(f"--------------------------------------------------------------------------------\n"
+    print("--------------------------------------------------------------------------------\n"
     "                               PYTHON CHALLENGE\n"
     "--------------------------------------------------------------------------------\n"
     )
