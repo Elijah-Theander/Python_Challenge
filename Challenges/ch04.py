@@ -11,72 +11,77 @@ October 7, 2022
 from urllib.request import urlopen
 import re
 
-def traverse(startLink,substring):
+
+def traverse(start_link, substring):
+    """Traverses webpages for linkedlist python challenge."""
+
     print("Traversing Links, this will take a while...")
-    data = urlopen(startLink).read().decode('utf-8')
+    data = urlopen(start_link).read().decode("utf-8")
     result = substring.search(data)
-    next = result.group(1)
-    nextLink =f'http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing={next}'
+    next_number = result.group(1)
+    next_link = (
+        f"http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing={next_number}"
+    )
 
     while True:
-        data = urlopen(nextLink).read().decode('utf-8')
+        data = urlopen(next_link).read().decode("utf-8")
         result = substring.search(data)
-        output = [data,next,nextLink]
+        output = [data, next, next_link]
 
         if result is None:
-            print('Link traversal finished!\n')
+            print("Link traversal finished!\n")
             return output
-            break
-        
-        next = result.group(1)
-        nextLink = f'http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing={next}'
 
-
+        next_number = result.group(1)
+        next_link = f"http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing={next_number}"
 
 
 def challenge(num):
-    startingURL = 'http://www.pythonchallenge.com/pc/def/linkedlist.php'
-    print("--------------------------------------------------------------------------------\n"
-    f"Challenge # {num}: 4 Grab information from webpages.\n"
-    f"Starting url: {startingURL}\n"
-    "--------------------------------------------------------------------------------\n"
-     )
+    """Implementation of challenge 4."""
 
-    firstLink = 'http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing=12345'
-    substring = re.compile('and the next nothing is (\d+)')
+    starting_url = "http://www.pythonchallenge.com/pc/def/linkedlist.php"
+    print(
+        "--------------------------------------------------------------------------------\n"
+        f"Challenge # {num}: 4 Grab information from webpages.\n"
+        f"Starting url: {starting_url}\n"
+        "--------------------------------------------------------------------------------\n"
+    )
 
-    result = traverse(firstLink,substring)
+    first_link = "http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing=12345"
+    substring = re.compile("and the next nothing is (\d+)")
 
-    print(f'Output from first traversal:\n{result[0]}\n{result[1]}\n{result[2]}\n')
+    result = traverse(first_link, substring)
 
-    #so, we have to divide by two and run again.
+    print(f"Output from first traversal:\n{result[0]}\n{result[1]}\n{result[2]}\n")
 
-    next = int( int(result[1])/2)
-    nextLink = f'http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing={next}'
+    # so, we have to divide by two and run again.
 
-    print(f"The next starting link for traversal:\n{nextLink}\n")
+    next_number = int(int(result[1]) / 2)
+    next_link = (
+        f"http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing={next_number}"
+    )
 
-    result = traverse(nextLink,substring)
+    print(f"The next starting link for traversal:\n{next_link}\n")
+
+    result = traverse(next_link, substring)
 
     print(f"Results of second traversal:\n{result[0]}\n{result[1]}\n{result[2]}\n")
 
-
-
-    next = result[0]
-    nextURL = f'http://www.pythonchallenge.com/pc/def/{next}\n'
-    print(f'Next challenge URL: {nextURL}')
-    
-
+    next_path = result[0]
+    next_url = f"http://www.pythonchallenge.com/pc/def/{next_path}\n"
+    print(f"Next challenge URL: {next_url}")
 
 
 def main():
-    print("--------------------------------------------------------------------------------\n"
-    "                               PYTHON CHALLENGE\n"
-    "--------------------------------------------------------------------------------\n"
+    """Main Function"""
+    print(
+        "--------------------------------------------------------------------------------\n"
+        "                               PYTHON CHALLENGE\n"
+        "--------------------------------------------------------------------------------\n"
     )
 
     challenge(4)
-    
+
 
 if __name__ == "__main__":
     main()
